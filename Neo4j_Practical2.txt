@@ -1,0 +1,32 @@
+create(u:university {name:"University",add:"pune"})
+
+create(d:department{name:"Mathemetics",add:"pune"})
+create(d:department{name:"Geology",add:"pune"})
+create(d:department{name:"Chemistry",add:"pune"})
+create(d:department{name:"Computer Science",add:"pune"})
+
+create(c:course{name:”bsc”})
+create(c:course{name:”msc”})
+create(c:course{name:”bca”})
+create(c:course{name:”mca”})
+create(c:course{name:”ba”})
+create(c:course{name:”ma”})
+
+
+match(u:university),(d:department) where u.name="university" and d.name="Mathematics" create(u)-[:department]->(d) return u,d
+match(u:university),(d:department) where u.name="university" and d.name="Geology" create(u)-[: department]->(d) return u,d
+match(u:university),(d:department) where u.name="university" and d.name="Chemistry" create(u)-[: department]->(d) return u,d
+match(u:university),(d:department) where u.name="university" and d.name="Computer Science" create(u)-[: department]->(d) return u,d
+
+
+match(d:department),(c:course) where d.name="Mathematics" and c.name="bsc" create(d)-[: course]->(c) return d,c
+match(d:department),(c:course) where d.name="Mathematics" and c.name="msc" create(d)-[: course]->(c) return d,c
+match(d:department),(c:course) where d.name="Mathematics" and c.name="ba" create(d)-[: course]->(c) return d,c
+match(d:department),(c:course) where d.name="Mathematics" and c.name="ma" create(d)-[: course]->(c) return d,c
+match(d:department),(c:course) where d.name="Geology" and c.name="bsc" create(d)-[: course]->(c) return d,c
+match(d:department),(c:course) where d.name="Chemistry" and c.name="bsc" create(d)-[: course]->(c) return d,c
+match(d:department),(c:course) where d.name="Chemistry" and c.name="msc" create(d)-[: course]->(c) return d,c
+match(d:department),(c:course) where d.name="Computer Science" and c.name="bsc" create(d)-[: course]->(c) return d,c
+match(d:department),(c:course) where d.name="Computer Science" and c.name="msc" create(d)-[: course]->(c) return d,c
+match(d:department),(c:course) where d.name="Computer Science" and c.name="bca" create(d)-[: course]->(c) return d,c
+match(d:department),(c:course) where d.name="Computer Science" and c.name="mca" create(d)-[: course]->(c) return d,c

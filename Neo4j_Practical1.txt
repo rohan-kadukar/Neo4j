@@ -1,0 +1,41 @@
+create(p:person{name:"Rohan",age:21}) return p
+create(p:person{name:"Swapnil",age:25}) return p
+create(p:person{name:"Sanket",age:21}) return p
+create(p:person{name:"Ruskeshhi",age:22}) return p
+create(p:person{name:"Nihar",age:23}) return p
+create(p:person{name:"Yuvraj",age:31}) return p
+create(p:person{name:"Nanda",age:50}) return p
+
+
+
+create(c:city{name:"Pune"})
+create(c:city{name:"Mumbai"})
+create(c:city{name:"Kolhapur"})
+
+
+
+create(P:Project{name:"Finance"})
+create(P:Project{name:"Inventory"})
+create(P:Project{name:"Sales"})
+
+
+
+match(p:person),(c:city) where p.name="Rohan" and c.name="Kolhapur" create(p)-[:staysin]->(c) return p,c
+match(p:person),(c:city) where p.name="Swapnil" and c.name="Pune" create(p)-[:staysin]->(c) return p,c
+match(p:person),(c:city) where p.name="Nihar" and c.name="Pune" create(p)-[:staysin]->(c) return p,c
+match(p:person),(c:city) where p.name="Rushikesh" and c.name="Mumbai" create(p)-[:staysin]->(c) return p,c
+match(p:person),(c:city) where p.name="Sanket" and c.name="Mumbai" create(p)-[:staysin]->(c) return p,c
+
+
+
+match(p:person),(P:Project) where p.name="Rohan" and P.name="Finance" create(p)-[:Projectin]->(P) return p,P
+match(p:person),(P:Project) where p.name="Sanket" and P.name="Inventory" create(p)-[:Projectin]->(P) return p,P
+match(p:person),(P:Project) where p.name="Rushikesh" and P.name="Inventory" create(p)-[:Projectin]->(P) return p,P
+match(p:person),(P:Project) where p.name="Swapnil" and P.name="Sales" create(p)-[:Projectin]->(P) return p,P
+
+
+
+match(p:person),(r:person) where p.name="Rohan" and r.name="Yuvraj" create(p)-[:brotherof]->(r) return p,r
+match(p:person),(r:person) where p.name="Rohan" and r.name="Nanda" create(p)-[:motherof]->(r) return p,r
+
+
