@@ -1,0 +1,11 @@
+//i)List persons staying in pune
+match (p:person),(l:location) where l.name=”pune” and (p)-[:live_in]->(l) return p.name
+
+//ii) List the persons working on finance project
+match (p:person),(pr:project) where pr.name=”finance” and (p)-[:work]->(pr) return p.name
+
+//iii)list all mothers
+match (p:person),(pp:person) where (p)-[:mother_of]->(pp) return p.name as name1
+
+//iv)list friends of Asmita
+match (p:person),(pp:person) where p.name=”asmita” and (p)-[:friend_of]->(pp) return p.name

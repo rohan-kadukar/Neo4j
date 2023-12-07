@@ -1,0 +1,31 @@
+create(:university{name:"university"})
+create(:Department {name: "Mathematics"})
+create(:Department {name: "Geology"})
+create (:Department {name: "Chemistry"})
+create(:Department {name: "Computer"})
+create(:Course {name: "Algebra"})
+create (:Course {name: "Mineralogy"})
+create (:Course {name: "Organic Chemistry"})
+create  (:Course {name: "Database Systems"})
+
+
+match (a:university) ,(b:Department) where a.name="university" and b.name="Geology" create (a)-[:has]->(b) return a,b
+match (a:university) ,(b:Department) where a.name="university" and b.name="Chemistry" create (a)-[:has]->(b) return a,b
+match (a:university) ,(b:Department) where a.name="university" and b.name="Mathematics" create (a)-[:has]->(b) return a,b
+match (a:university) ,(b:Department) where a.name="university" and b.name="Computer" create (a)-[:has]->(b) return a,b
+match (a:Department) ,(b:Course) where a.name="Chemistry" and b.name="Organic Chemistry" create (a)-[:has]->(b) return a,b
+match (a:Department) ,(b:Course) where a.name="Geology" and b.name="Mineralogy" create (a)-[:has]->(b) return a,b
+match (a:Department) ,(b:Course) where a.name="Computer" and b.name="Database Systems" create (a)-[:has]->(b) return a,b
+
+//1)List all the courses of chemistry department
+MATCH (d:Department)-[:has]->(c:Course) WHERE d.name = "Chemistry" RETURN c.name;
+
+//2)List the common course across chemistry and computer department
+WITH [“Chemistry”,”Computer”] as names MATCH (d:Department) WHERE d.name in names WITH collect(d) as s MATCH (c:Course) WHERE ALL(d in s WHERE (d)-[:Conducts]->(c)) RETURN c
+
+//3)List all departments of university
+MATCH (u:university)-[:has]->(d:department) WHERE u.name = "university" RETURN d.name;
+
+//4 )List courses provided of computer department
+MATCH (d:Department)-[:has]->(c:Course) WHERE d.name = "Computer" RETURN c.name;
+
